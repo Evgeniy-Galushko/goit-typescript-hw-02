@@ -2,9 +2,10 @@ import s from "./ImageModal.module.css";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 import React from "react";
+import { ModalData } from "../App/App.types";
 
 interface ImageModalProps {
-  photo: { src: string; alt: string } | null;
+  photo: ModalData | null;
   isOpen: boolean;
   onRequestClose: () => void;
 }
@@ -34,7 +35,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <img src={photo.src} alt={photo.alt} className={s.imgMod} />
+      {photo && <img src={photo.src} alt={photo.alt} className={s.imgMod} />}
     </Modal>
   );
 };

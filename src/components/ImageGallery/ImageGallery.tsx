@@ -1,11 +1,8 @@
 import s from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
 import { CartImg } from "../App/App.types";
+import { ModalData } from "../App/App.types";
 
-interface ModalData {
-  src: string;
-  alt: string;
-}
 interface ImageGalleryProps {
   fotos: CartImg[];
   handleChange: ({}: ModalData) => void;

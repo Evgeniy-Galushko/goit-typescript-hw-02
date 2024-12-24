@@ -1,7 +1,6 @@
 import s from "./SearchBar.module.css";
 import { FcSearch } from "react-icons/fc";
 import toast, { Toaster } from "react-hot-toast";
-import { FormEvent } from "react";
 
 interface SearchBarProps {
   handleSubmit: (requestText: string) => void;

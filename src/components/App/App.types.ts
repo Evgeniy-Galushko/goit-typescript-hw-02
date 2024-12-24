@@ -11,3 +11,8 @@ export interface CartImg {
     location: string;
   };
 }
+
+export type ModalData = {
+  src: string;
+  alt: string;
+};

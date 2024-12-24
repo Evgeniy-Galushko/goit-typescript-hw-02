@@ -14,6 +14,14 @@ import BtnDown from "../BtnDown/BtnDown";
 import Loader from "../Loader/Loader";
 import ImageModal from "../ImageModal/ImageModal";
 import { CartImg } from "./App.types";
+import { ModalData } from "./App.types";
+
+interface Data {
+  data: {
+    total_pages: number;
+    results: CartImg[];
+  };
+}
 
 export default function App() {
   const [textMessage, setTextMessage] = useState<string>("");
@@ -31,13 +39,6 @@ export default function App() {
     setPage(1);
     setTextMessage(requestText);
   };
-
-  interface Data {
-    data: {
-      total_pages: number;
-      results: CartImg[];
-    };
-  }
 
   useEffect(() => {
     async function request() {
@@ -67,12 +68,7 @@ export default function App() {
     setPage(page + 1);
   };
 
-  type ModalData = {
-    src: string;
-    alt: string;
-  };
-
-  const handleChange = (modalData: ModalData) => {
+  const handleChange = (modalData: ModalData | null) => {
     setModalIsOpen(true);
     setModalPhoto(modalData);
   };
@@ -81,7 +77,6 @@ export default function App() {
     setModalIsOpen(false);
   }
 
-  // if (modalPhoto) return;
   return (
     <>
       <ImageModal
