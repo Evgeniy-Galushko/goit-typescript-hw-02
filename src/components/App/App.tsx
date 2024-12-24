@@ -81,7 +81,7 @@ export default function App() {
     setModalIsOpen(false);
   }
 
-  if (!modalPhoto) return;
+  // if (modalPhoto) return;
   return (
     <>
       <ImageModal
