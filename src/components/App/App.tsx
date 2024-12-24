@@ -23,7 +23,7 @@ export default function App() {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const [totalNumberOfPages, setTotalNumberOfPages] = useState<number>(0);
-  const [modalPhoto, setModalPhoto] = useState<ModalData>();
+  const [modalPhoto, setModalPhoto] = useState<ModalData | null>(null);
   const [page, setPage] = useState<number>(1);
 
   const handleSubmit = (requestText: string) => {

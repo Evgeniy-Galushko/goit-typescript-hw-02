@@ -4,7 +4,7 @@ Modal.setAppElement("#root");
 import React from "react";
 
 interface ImageModalProps {
-  photo: { src: string; alt: string };
+  photo: { src: string; alt: string } | null;
   isOpen: boolean;
   onRequestClose: () => void;
 }
