@@ -10,8 +10,9 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ handleSubmit }) => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const form = e.target;
-    const requestText = form.elements.message.value.trim().toLowerCase();
+    const form = e.currentTarget;
+    const input = form.elements.namedItem("message") as HTMLInputElement;
+    const requestText = input.value.trim().toLowerCase();
     if (requestText === "") {
       toast.error("Please enter search term!");
       return;
