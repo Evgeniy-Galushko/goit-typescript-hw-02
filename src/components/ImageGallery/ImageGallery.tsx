@@ -1,7 +1,17 @@
 import s from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
+import { CartImg } from "../App/App.types";
 
-export default function ImageGallery({ fotos, handleChange }) {
+interface ModalData {
+  src: string;
+  alt: string;
+}
+interface ImageGalleryProps {
+  fotos: CartImg[];
+  handleChange: ({}: ModalData) => void;
+}
+
+const ImageGallery: React.FC<ImageGalleryProps> = ({ fotos, handleChange }) => {
   return (
     <ul className={s.ul}>
       {fotos.map(({ id, urls, asset_type, likes, user }) => {
@@ -23,4 +33,6 @@ export default function ImageGallery({ fotos, handleChange }) {
       })}
     </ul>
   );
-}
+};
+
+export default ImageGallery;

@@ -1,6 +1,16 @@
 import s from "./ImageCard.module.css";
 
-export default function ImageCard({
+interface ImageCardProps {
+  id: string;
+  src: string;
+  alt: string;
+  handleChange: () => void;
+  likes: number;
+  user: string;
+  location: string;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({
   id,
   src,
   alt,
@@ -8,7 +18,7 @@ export default function ImageCard({
   likes,
   user,
   location,
-}) {
+}) => {
   if (location === null) {
     location = "Earth";
   }
@@ -42,4 +52,6 @@ export default function ImageCard({
       </ul>
     </div>
   );
-}
+};
+
+export default ImageCard;

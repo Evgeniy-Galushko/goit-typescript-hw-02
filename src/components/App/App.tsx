@@ -3,33 +3,41 @@ import { GoChevronUp } from "react-icons/go";
 import { GoChevronDown } from "react-icons/go";
 
 import "./App.css";
-import SearchBar from "./SearchBar/SearchBar";
-import ImageGallery from "./ImageGallery/ImageGallery";
+import SearchBar from "../SearchBar/SearchBar";
+import ImageGallery from "../ImageGallery/ImageGallery";
 
-import requestApi from "../request-api";
-import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
-import ErrorMessage from "./ErrorMessage/ErrorMessage";
-import BtnUp from "./BtnUp/BtnUp";
-import BtnDown from "./BtnDown/BtnDown";
-import Loader from "./Loader/Loader";
-import ImageModal from "./ImageModal/ImageModal";
+import requestApi from "../../request-api";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import BtnUp from "../BtnUp/BtnUp";
+import BtnDown from "../BtnDown/BtnDown";
+import Loader from "../Loader/Loader";
+import ImageModal from "../ImageModal/ImageModal";
+import { CartImg } from "./App.types";
 
 export default function App() {
-  const [textMessage, setTextMessage] = useState("");
-  const [photoCollection, setPhotoCollection] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [textMessage, setTextMessage] = useState<string>("");
+  const [photoCollection, setPhotoCollection] = useState<CartImg[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
-  const [totalNumberOfPages, setTotalNumberOfPages] = useState(0);
-  const [modalPhoto, setModalPhoto] = useState("");
-  const [page, setPage] = useState(1);
+  const [totalNumberOfPages, setTotalNumberOfPages] = useState<number>(0);
+  const [modalPhoto, setModalPhoto] = useState<ModalData>();
+  const [page, setPage] = useState<number>(1);
 
-  const handleSubmit = (requestText) => {
+  const handleSubmit = (requestText: string) => {
     setPhotoCollection([]);
     setPage(1);
     setTextMessage(requestText);
   };
+
+  interface Data {
+    data: {
+      total_pages: number;
+      results: CartImg[];
+    };
+  }
 
   useEffect(() => {
     async function request() {
@@ -39,7 +47,7 @@ export default function App() {
         }
         setLoading(true);
         if (!textMessage) return;
-        const data = await requestApi(textMessage, page);
+        const data: Data = await requestApi(textMessage, page);
         setTotalNumberOfPages(data.data.total_pages);
         setPhotoCollection((prevImages) => [
           ...prevImages,
@@ -55,11 +63,16 @@ export default function App() {
     request();
   }, [textMessage, page]);
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     setPage(page + 1);
   };
 
-  const handleChange = (modalData) => {
+  type ModalData = {
+    src: string;
+    alt: string;
+  };
+
+  const handleChange = (modalData: ModalData) => {
     setModalIsOpen(true);
     setModalPhoto(modalData);
   };
@@ -68,6 +81,7 @@ export default function App() {
     setModalIsOpen(false);
   }
 
+  if (!modalPhoto) return;
   return (
     <>
       <ImageModal

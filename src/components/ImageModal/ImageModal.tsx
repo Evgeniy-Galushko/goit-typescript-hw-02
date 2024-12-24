@@ -1,8 +1,19 @@
 import s from "./ImageModal.module.css";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
+import React from "react";
 
-export default function ImageModal({ photo, isOpen, onRequestClose }) {
+interface ImageModalProps {
+  photo: { src: string; alt: string };
+  isOpen: boolean;
+  onRequestClose: () => void;
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({
+  photo,
+  isOpen,
+  onRequestClose,
+}) => {
   const customStyles = {
     content: {
       top: "50%",
@@ -14,6 +25,8 @@ export default function ImageModal({ photo, isOpen, onRequestClose }) {
       transform: "translate(-50%, -50%)",
     },
   };
+
+  if (!photo) return;
   return (
     <Modal
       isOpen={isOpen}
@@ -24,4 +37,6 @@ export default function ImageModal({ photo, isOpen, onRequestClose }) {
       <img src={photo.src} alt={photo.alt} className={s.imgMod} />
     </Modal>
   );
-}
+};
+
+export default ImageModal;

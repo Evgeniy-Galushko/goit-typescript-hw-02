@@ -1,9 +1,14 @@
 import s from "./SearchBar.module.css";
 import { FcSearch } from "react-icons/fc";
 import toast, { Toaster } from "react-hot-toast";
+import { FormEvent } from "react";
 
-export default function RequestForm({ handleSubmit }) {
-  const onSubmit = (e) => {
+interface SearchBarProps {
+  handleSubmit: (requestText: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ handleSubmit }) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const form = e.target;
     const requestText = form.elements.message.value.trim().toLowerCase();
@@ -44,4 +49,6 @@ export default function RequestForm({ handleSubmit }) {
       </div>
     </header>
   );
-}
+};
+
+export default SearchBar;
