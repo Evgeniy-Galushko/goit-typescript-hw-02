@@ -1,11 +1,11 @@
 import axios from "axios";
 import { Data } from "./components/App/App.types";
 
-export default async function requestAp<Data>(
+export default async function requestAp(
   textSearch: string,
   pages: number
 ): Promise<Data> {
-  const savedQuery: Data = await axios.get(
+  const savedQuery = await axios.get<Data>(
     "https://api.unsplash.com/search/photos",
     {
       params: {
@@ -16,6 +16,5 @@ export default async function requestAp<Data>(
       },
     }
   );
-  console.log(savedQuery);
-  return savedQuery;
+  return savedQuery.data;
 }

@@ -18,9 +18,9 @@ export type ModalData = {
 };
 
 export interface Data {
-  data: {
-    total: number;
-    total_pages: number;
-    results: CartImg[];
-  };
+  // data: {
+  total: number;
+  total_pages: number;
+  results: CartImg[];
+  // };
 }

@@ -15,7 +15,6 @@ import Loader from "../Loader/Loader";
 import ImageModal from "../ImageModal/ImageModal";
 import { CartImg } from "./App.types";
 import { ModalData } from "./App.types";
-import { Data } from "./App.types";
 
 export default function App() {
   const [textMessage, setTextMessage] = useState<string>("");
@@ -42,12 +41,11 @@ export default function App() {
         }
         setLoading(true);
         if (!textMessage) return;
-        const response: Data = await requestApi(textMessage, page);
-        console.log(response);
-        setTotalNumberOfPages(response.data.total_pages);
+        const response = await requestApi(textMessage, page);
+        setTotalNumberOfPages(response.total_pages);
         setPhotoCollection((prevImages) => [
           ...prevImages,
-          ...response.data.results,
+          ...response.results,
         ]);
       } catch (error) {
         console.log(error);
