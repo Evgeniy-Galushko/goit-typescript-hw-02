@@ -24,11 +24,3 @@ export interface Data {
     results: CartImg[];
   };
 }
-
-// export interface Request {
-//   config: {};
-//   data: {
-//     total_pages: number;
-//     results: CartImg[];
-//   };
-// }
